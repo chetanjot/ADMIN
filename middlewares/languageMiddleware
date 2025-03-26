@@ -1,0 +1,11 @@
+const translations = require("../core/constants/server_messages");
+
+// Middleware to set the language based on request headers, query, or cookies
+module.exports = (req, res, next) => {
+  if (translations.messages["en"]) {
+    req.language = "en";
+  } else {
+    req.language = "en";
+  }
+  next();
+};
