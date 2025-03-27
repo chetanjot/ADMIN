@@ -1,3 +1,4 @@
+const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const path = require("path");
@@ -6,13 +7,14 @@ const CryptoJS = require('crypto-js');
 exports.jwtSign = (user, expires) =>
   new Promise((resolve, reject) => {
     const payload = { email: user.email };
-    const secret = fs.readFileSync(
-      path.join(__dirname, "../core/private.key")
-    );
+    // const secret = fs.readFileSync(
+    //   path.join(__dirname, "../core/private.key")
+    // );
+    const secret = process.env.SECRET_KEY
     const options = {
       expiresIn: expires,
       audience: user.id,
-      algorithm: "RS256",
+      // algorithm: "RS256",
     };
     jwt.sign(payload, secret, options, (err, data) => {
       if (err) reject(err);
@@ -22,13 +24,14 @@ exports.jwtSign = (user, expires) =>
   exports.jwtSignTwitter = (user, expires) =>
   new Promise((resolve, reject) => {
     const payload = { username: user.username };
-    const secret = fs.readFileSync(
-      path.join(__dirname, "../core/private.key")
-    );
+    // const secret = fs.readFileSync(
+    //   path.join(__dirname, "../core/private.key")
+    // );
+    const secret = process.env.SECRET_KEY
     const options = {
       expiresIn: expires,
       audience: user.id,
-      algorithm: "RS256",
+      // algorithm: "RS256",
     };
     jwt.sign(payload, secret, options, (err, data) => {
       if (err) reject(err);
@@ -38,9 +41,10 @@ exports.jwtSign = (user, expires) =>
 
 exports.jwtVerify = (token) =>
   new Promise((resolve, reject) => {
-    const secret = fs.readFileSync(
-      path.join(__dirname, "../core/private.key")
-    );
+    // const secret = fs.readFileSync(
+    //   path.join(__dirname, "../core/private.key")
+    // );
+    const secret = process.env.SECRET_KEY
     jwt.verify(token, secret, (err, data) => {
       if (err) reject(err);
       resolve(data);
