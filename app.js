@@ -15,6 +15,7 @@ const databaseManager = require("./core/db_connection");
 const authRoute = require("./lib/auth/auth_route");
 
 const usersRoute = require("./lib/users/users_route");
+const categoryRoute = require("./lib/category/category_route.js");
 
 // Middleware
 // Middleware
@@ -46,6 +47,7 @@ app.use("/v1/auth", authRoute);
 // Apply authentication middleware for protected routes
 app.use(isAuthenticated);
 app.use("/v1/users", usersRoute);
+app.use("/v1/category", categoryRoute);
 
 
 
