@@ -15,9 +15,9 @@ const otpSchema = new mongoose.Schema(
     expiryTime: {
       type: Date,
       default: Date.now,
-      expires: 3600, // Expiry time in seconds (3600 = 1 hour)
+      expires: 600, // Expiry time in seconds (600 = 10 minutes)
       index: true, // Ensures TTL index for expiry
-    },
+    },    
     operation: {
       type: Number, // Define specific values if needed (e.g., 1 = login, 2 = reset password, etc.)
       required: [true, "Operation type is required"],

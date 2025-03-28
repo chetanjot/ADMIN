@@ -12,3 +12,18 @@ exports.createAccessToken = async (tokenData) => {
     throw new Error(err);
   }
 };
+
+exports.generateOtp = async (userId, operation) => {
+  try {
+    const operationModified = operation;
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    await otpModel.create({
+      otp,
+      userId,
+      operation: operationModified,
+    });
+    return otp;
+  } catch (error) {
+    return error;
+  }
+};
